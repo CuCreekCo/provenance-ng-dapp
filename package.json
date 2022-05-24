@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~13.3.0",
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
-    "@provenanceio/walletconnect-js": "^1.0.15",
+    "@provenanceio/walletconnect-js": "^1.0.19",
     "crypto-browserify": "^3.12.0",
     "rxjs": "~7.5.0",
     "stream-browserify": "^3.0.0",

@@ -41,6 +41,7 @@
               "google-protobuf/google/protobuf/any_pb",
               "google-protobuf/google/protobuf/timestamp_pb",
               "hoist-non-react-statics",
+              "@provenanceio/walletconnect-js/lib/services",
               "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/tx_pb",
               "@provenanceio/wallet-lib/lib/proto/cosmos/base/v1beta1/coin_pb",
               "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/accessgrant_pb",
@@ -61,7 +62,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",

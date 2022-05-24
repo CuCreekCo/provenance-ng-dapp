@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WalletConnectService} from "@provenanceio/walletconnect-js";
+import {WalletConnectService} from "@provenanceio/walletconnect-js/lib/services";
 
 @Component({
     selector: 'app-connect-wallet',
