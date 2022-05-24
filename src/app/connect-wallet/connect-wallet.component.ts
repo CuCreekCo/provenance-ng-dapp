@@ -8,13 +8,18 @@ import {WalletConnectService} from "@provenanceio/walletconnect-js/lib/service";
 })
 export class ConnectWalletComponent implements OnInit {
 
-    constructor(private walletConnectService: WalletConnectService) {
+    constructor() {
+        const walletConnectService = new WalletConnectService();
+        console.dir(walletConnectService);
     }
 
     ngOnInit(): void {
     }
 
+    /*
     qrCodeImage(): string {
         return this.walletConnectService.state.QRCode;
     }
+
+     */
 }
