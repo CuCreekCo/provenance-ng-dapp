@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WalletConnectService} from "@provenanceio/walletconnect-js/lib/service";
+import {WalletConnectService} from "../wallet-connect.service";
 
 @Component({
     selector: 'app-connect-wallet',
@@ -8,18 +8,21 @@ import {WalletConnectService} from "@provenanceio/walletconnect-js/lib/service";
 })
 export class ConnectWalletComponent implements OnInit {
 
-    constructor() {
-        const walletConnectService = new WalletConnectService();
-        console.dir(walletConnectService);
+    qr: string = "";
+    address: string = "";
+    connected: boolean = false;
+
+    constructor(private walletConnectService: WalletConnectService) {
     }
 
     ngOnInit(): void {
+        this.walletConnectService.connect().subscribe(s => {
+            this.qr = s.QRCode;
+            this.address = s.address;
+            this.connected = s.connected;
+        });
+        this.walletConnectService.messages.subscribe(s => {
+            console.dir(s);
+        })
     }
-
-    /*
-    qrCodeImage(): string {
-        return this.walletConnectService.state.QRCode;
-    }
-
-     */
 }

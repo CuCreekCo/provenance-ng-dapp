@@ -70,7 +70,7 @@ Update `tsconfig.json` to provide the following paths:
     }
 ```
 
-Install the custome webpack dependency: `npm install @angular-builders/custom-webpack --save`
+Install the custom webpack dependency: `npm install @angular-builders/custom-webpack --save`
 
 Include the file images included in `walletconnect-js` by creating a custom webpack 
 file `extra-webpack-config.js` and then update `angular.json` replacing all 
@@ -82,3 +82,9 @@ web pack config element to the `architect` section:
               "path": "./extra-webpack-config.js"
             },
 ```
+
+## Runtime Issues
+
+Add a polyfill for `global` as shown in the `polyfills.ts` file.
+
+Add a custom `main.lib.d.ts`.
