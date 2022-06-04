@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {WalletConnectService} from "../service/wallet-connect.service";
-import {buildMessage, createAnyMessageBase64} from "@provenanceio/wallet-utils";
-import {Message} from 'google-protobuf';
-import {convertUtf8ToHex} from '@walletconnect/utils';
+import {GasPrice} from "@provenanceio/walletconnect-js/lib/types";
 
 @Component({
     selector: 'app-send-hash',
@@ -23,11 +21,16 @@ export class SendHashComponent implements OnInit {
     }
 
     onSubmit(): void {
+        const gasPrice: GasPrice = {
+            gasPrice: 1905,
+            gasPriceDenom: 'nhash'
+        }
+
         this.walletConnectService.sendCoin(
             this.sendHashForm.get('toAddress')?.value,
             'nhash',
             this.sendHashForm.get('amount')?.value,
-            1905
+            gasPrice
         ).subscribe(n => {
             console.log(n);
         }, e => {

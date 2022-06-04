@@ -6,6 +6,7 @@ import {WalletConnectMessage} from "../model/Models";
 import {Message} from "google-protobuf";
 import {buildMessage, createAnyMessageBase64} from "@provenanceio/wallet-utils";
 import {convertUtf8ToHex} from "@walletconnect/utils";
+import {GasPrice} from "@provenanceio/walletconnect-js/lib/types";
 
 @Injectable({
     providedIn: 'root'
@@ -75,7 +76,7 @@ export class WalletConnectService {
         return this.wc.state;
     }
 
-    sendCoin(toAddress: string, denom: string, amount: string, gasPrice: number): Observable<any> {
+    sendCoin(toAddress: string, denom: string, amount: string, gasPrice: GasPrice): Observable<any> {
         const sendMessage = {
             fromAddress: this.state.address,
             toAddress: toAddress,
