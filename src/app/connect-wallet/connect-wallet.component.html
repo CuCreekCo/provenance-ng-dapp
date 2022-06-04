@@ -1,6 +1,21 @@
-<p>Connect Wallet QR</p>
 <div>
-	<p>Connected: {{connected}}</p>
-	<p>Address: {{address}}</p>
+	<div class="text-white">
+		{{state().address}}
+	</div>
+	<button type="button" [class.visually-hidden]="!state().connected" class="btn btn-sm btn-outline-light" (click)="disconnect()">Disconnect</button>
+	<button type="button" [class.visually-hidden]="state().connected" class="btn btn-sm btn-outline-light" (click)="connect(content)">Connect</button>
 </div>
-<img [src]="qr">
+
+<ng-template #content let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Scan with Wallet</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<div class="row">
+			<div class="col">
+				<img [src]="state().QRCode" class="mx-auto d-block">
+			</div>
+		</div>
+	</div>
+</ng-template>

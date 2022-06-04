@@ -43,6 +43,7 @@
               "google-protobuf/google/protobuf/timestamp_pb",
               "hoist-non-react-statics",
               "@provenanceio/walletconnect-js/lib/service",
+              "@provenanceio/wallet-lib/lib/services/message-service",
               "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/tx_pb",
               "@provenanceio/wallet-lib/lib/proto/cosmos/base/v1beta1/coin_pb",
               "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/accessgrant_pb",
@@ -54,7 +55,9 @@
               "@tendermint/belt",
               "@walletconnect/window-metadata",
               "@walletconnect/socket-transport",
-              "@walletconnect/environment"
+              "@walletconnect/environment",
+              "@walletconnect/types",
+              "@walletconnect/client"
             ]
           },
           "configurations": {

@@ -1,0 +1,12 @@
+<form [formGroup]="sendHashForm" (ngSubmit)="onSubmit()">
+	<div class="mb-3">
+		<label for="toAddress" class="form-label">To Address</label>
+		<input type="text" class="form-control" id="toAddress" formControlName="toAddress">
+	</div>
+	<div class="mb-3">
+		<label for="amount" class="form-label">Amount</label>
+		<input type="text" class="form-control" id="amount" formControlName="amount">
+	</div>
+	<p>{{ sendHashForm.status }}</p>
+	<button type="submit" class="btn btn-primary" [disabled]="!sendHashForm.valid">Send</button>
+</form>
