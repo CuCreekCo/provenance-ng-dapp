@@ -8,5 +8,6 @@
 		<input type="text" class="form-control" id="amount" formControlName="amount">
 	</div>
 	<p>{{ sendHashForm.status }}</p>
-	<button type="submit" class="btn btn-primary" [disabled]="!sendHashForm.valid">Send</button>
+	<button type="submit" class="btn btn-primary"
+	        [disabled]="!sendHashForm.valid || awaitingWallet">Send</button>
 </form>

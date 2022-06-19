@@ -1,0 +1,4 @@
+<p [hidden]="!hasAlert">
+	<ngb-alert [type]="alertType" (closed)="alertClosed()">{{ alertMessage }}</ngb-alert>
+</p>
+<app-pb-response [pbResponse]="pbResponse"></app-pb-response>

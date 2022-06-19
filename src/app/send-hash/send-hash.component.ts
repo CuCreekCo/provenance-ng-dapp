@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {WalletConnectService} from "../service/wallet-connect.service";
 import {GasPrice} from "@provenanceio/walletconnect-js/lib/types";
 
@@ -9,6 +9,9 @@ import {GasPrice} from "@provenanceio/walletconnect-js/lib/types";
     styleUrls: ['./send-hash.component.css']
 })
 export class SendHashComponent implements OnInit {
+
+    awaitingWallet:boolean = false;
+
     sendHashForm = this.formBuilder.group({
         toAddress: ['tp1vxlcxp2vjnyjuw6mqn9d8cq62ceu6lllpushy6', Validators.required],
         amount: ['100000000', Validators.required]
@@ -18,6 +21,12 @@ export class SendHashComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.walletConnectService.wcMessages.subscribe({
+            next: (n) => {
+                console.log('I am in send hash component');
+                console.dir(n);
+            }
+        })
     }
 
     onSubmit(): void {
@@ -26,15 +35,23 @@ export class SendHashComponent implements OnInit {
             gasPriceDenom: 'nhash'
         }
 
-        this.walletConnectService.sendCoin(
+        this.awaitingWallet = true;
+        this.walletConnectService.sendCoin2(
             this.sendHashForm.get('toAddress')?.value,
             'nhash',
             this.sendHashForm.get('amount')?.value,
             gasPrice
-        ).subscribe(n => {
-            console.log(n);
-        }, e => {
-            console.log(e);
+        ).subscribe({
+            next: (n) => {
+                console.log(n);
+            },
+            error: (e) => {
+                console.log(e);
+            },
+            complete: () => {
+                console.log('Complete');
+                this.awaitingWallet = false;
+            }
         });
     }
 

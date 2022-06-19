@@ -6,7 +6,7 @@ import {WalletConnectMessage} from "../model/Models";
 import {Message} from "google-protobuf";
 import {buildMessage, createAnyMessageBase64} from "@provenanceio/wallet-utils";
 import {convertUtf8ToHex} from "@walletconnect/utils";
-import {GasPrice} from "@provenanceio/walletconnect-js/lib/types";
+import {GasPrice, SendCoinData} from "@provenanceio/walletconnect-js/lib/types";
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +27,14 @@ export class WalletConnectService {
             });
         });
         this.wcObservable.subscribe(this.observer);
+
+        //does it look like local storage is still connected?
+        if(this.wc.state.connected) {
+            const af = async () => {
+                await this.wc.connect();
+            }
+            af();
+        }
     }
 
     private observer(m: WalletConnectMessage): void {
@@ -107,4 +115,14 @@ export class WalletConnectService {
         };
         return from(af());
     }
+    sendCoin2(toAddress: string, denom: string, amount: string, gasPrice: GasPrice): Observable<any> {
+        let sendCoinData: SendCoinData = {
+            amount: Number(amount),
+            denom: denom,
+            gasPrice: gasPrice,
+            to: toAddress
+        }
+        return from(this.wc.sendCoin(sendCoinData));
+    }
+
 }
