@@ -23,8 +23,12 @@ export class SendHashComponent implements OnInit {
     ngOnInit(): void {
         this.walletConnectService.wcMessages.subscribe({
             next: (n) => {
-                console.log('I am in send hash component');
+                console.log('I am in send hash component - next');
                 console.dir(n);
+            },
+            error: (e: any) => {
+                console.log('I am in send hash component - error');
+                console.dir(e);
             }
         })
     }

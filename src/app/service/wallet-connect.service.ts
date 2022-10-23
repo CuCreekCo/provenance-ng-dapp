@@ -6,7 +6,7 @@ import {WalletConnectMessage} from "../model/Models";
 import {Message} from "google-protobuf";
 import {buildMessage, createAnyMessageBase64} from "@provenanceio/wallet-utils/lib";
 import {convertUtf8ToHex} from "@walletconnect/utils";
-import {GasPrice, SendCoinData} from "@provenanceio/walletconnect-js/lib/types";
+import {CustomActionData, GasPrice, SendCoinData} from "@provenanceio/walletconnect-js/lib/types";
 
 @Injectable({
 
@@ -92,30 +92,18 @@ export class WalletConnectService {
             amountList: [{ denom: denom, amount: amount }],
         };
 
-        const metadata = JSON.stringify({
-            description: `Send ${denom}`,
-            address: this.state.address,
-            gasPrice: gasPrice,
-        });
-        // Custom Request
-        const request = {
-            id: 1,
-            jsonrpc: '2.0',
-            method: 'provenance_sendTransaction',
-            params: [metadata],
-        };
-
         const msgSend = buildMessage('MsgSend', sendMessage);
         const msg = createAnyMessageBase64('MsgSend', msgSend as Message);
-        const hexMsg = convertUtf8ToHex(msg);
-        request.params.push(hexMsg);
 
-        const af = async (): Promise<State> => {
-            const result = await this.state.connector?.sendCustomRequest(request);
-            return result;
-        };
-        return from(af());
+        let customAction: CustomActionData = {
+            method: "provenance_sendTransaction",
+            gasPrice: gasPrice,
+            description: `Send ${amount}${denom} to ${toAddress}`,
+            message: msg
+        }
+        return from(this.wc.customAction(customAction));
     }
+
     sendCoin2(toAddress: string, denom: string, amount: string, gasPrice: GasPrice): Observable<any> {
         let sendCoinData: SendCoinData = {
             amount: Number(amount),

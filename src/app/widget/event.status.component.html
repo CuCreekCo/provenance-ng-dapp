@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="row" [hidden]="!hasEvent()">
+		<div class="col">
+			<div class="row">
+				<div class="col">Last Event:</div>
+				<div class="col">{{lastEvent}}</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<ngx-json-viewer [expanded]="false" [json]="resultData()"></ngx-json-viewer>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

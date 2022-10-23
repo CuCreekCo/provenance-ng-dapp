@@ -9,9 +9,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NavbarComponent} from './widget/navbar.component';
 import {HomeComponent} from './home/home.component';
 import {ReactiveFormsModule} from "@angular/forms";
-import { SendHashComponent } from './send-hash/send-hash.component';
-import { AlertComponent } from './widget/alert.component';
-import { PbResponseComponent } from './widget/pb-response.component';
+import {SendHashComponent} from './send-hash/send-hash.component';
+import {EventStatusComponent} from './widget/event.status.component';
+import {NgxJsonViewerModule} from "ngx-json-viewer";
 
 @NgModule({
     declarations: [
@@ -20,14 +20,14 @@ import { PbResponseComponent } from './widget/pb-response.component';
         NavbarComponent,
         HomeComponent,
         SendHashComponent,
-        AlertComponent,
-        PbResponseComponent
+        EventStatusComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         NgbModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxJsonViewerModule
     ],
     providers: [
         WalletConnectService
