@@ -1,7 +1,8 @@
-<div [hidden]="pbResponse == null">
-
-	<p>{{state.txhash}}</p>
-	<p>{{state.height}}</p>
-	<p>{{state.gasWanted}}</p>
-	<p>{{state.gasUsed}}</p>
+<div [hidden]="!pbResponse">
+	<div *ngIf="state">
+		<p>{{state.txhash}}</p>
+		<p>{{state.height}}</p>
+		<p>{{state.gasWanted}}</p>
+		<p>{{state.gasUsed}}</p>
+	</div>
 </div>

@@ -36,7 +36,7 @@ export class SendHashComponent implements OnInit {
         }
 
         this.awaitingWallet = true;
-        this.walletConnectService.sendCoin2(
+        this.walletConnectService.sendCoin(
             this.sendHashForm.get('toAddress')?.value,
             'nhash',
             this.sendHashForm.get('amount')?.value,

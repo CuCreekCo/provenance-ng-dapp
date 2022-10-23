@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
-import {State, WalletConnectService as WC, WINDOW_MESSAGES} from "@provenanceio/walletconnect-js/esm/service";
+import {State, WalletConnectService as WC, WINDOW_MESSAGES} from "@provenanceio/walletconnect-js/lib/service";
 
 import {from, Observable, Observer} from "rxjs";
 import {WalletConnectMessage} from "../model/Models";
 import {Message} from "google-protobuf";
-import {buildMessage, createAnyMessageBase64} from "@provenanceio/wallet-utils";
+import {buildMessage, createAnyMessageBase64} from "@provenanceio/wallet-utils/lib";
 import {convertUtf8ToHex} from "@walletconnect/utils";
 import {GasPrice, SendCoinData} from "@provenanceio/walletconnect-js/lib/types";
 
 @Injectable({
+
     providedIn: 'root'
 })
 export class WalletConnectService {

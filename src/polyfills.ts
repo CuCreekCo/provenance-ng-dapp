@@ -48,10 +48,10 @@ import '@angular/localize/init';
  * Zone JS is required by default for Angular itself.
  */
 import 'zone.js';  // Included with Angular CLI.
-import { Buffer } from 'buffer';
+//import { Buffer } from 'buffer';
 
-window.global = globalThis;
-window.Buffer = Buffer;
+//window.global = globalThis;
+//window.Buffer = Buffer;
 
 
 /***************************************************************************************************

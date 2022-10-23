@@ -83,8 +83,9 @@ web pack config element to the `architect` section:
             },
 ```
 
-## Runtime Issues
+Fix Tendermint's shit exports by adding `"allowSyntheticDefaultImports": true` to
+`tsconfig.json` `compilerOptions`.
 
-Add a polyfill for `global` as shown in the `polyfills.ts` file.
+## Runtime Issues
 
 Add a custom `main.lib.d.ts`.

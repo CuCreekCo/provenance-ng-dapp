@@ -36,24 +36,55 @@ export class AlertComponent implements OnInit {
     private success() {
         this.alertType = "success";
     }
+
+    private responseMessage(walletConnectMessage: WalletConnectMessage) {
+        if(walletConnectMessage?.results) {
+            console.log(typeof walletConnectMessage.results.data);
+            // @ts-ignore
+            if(walletConnectMessage.results.result) {
+                // @ts-ignore
+                if (walletConnectMessage.results.valid === false) {
+                    // @ts-ignore
+                    this.alertMessage = walletConnectMessage.results.error.message;
+                    this.danger();
+                } else {
+                    this.alertMessage = "Transaction processed.";
+                    this.success();
+                }
+                this.hasAlert = true;
+
+            } else {
+                // @ts-ignore
+                if(walletConnectMessage.results.data.event == 'connect') {
+                    this.success();
+                    return "Connection established";
+                }
+            }
+        }
+        return null;
+    }
+    private pbResponseMessage(walletConnectMessage: WalletConnectMessage) {
+        console.dir(walletConnectMessage.results);
+        if(walletConnectMessage.results) {
+            if(walletConnectMessage.results.data) {
+                return walletConnectMessage.results.data;
+            }
+            // @ts-ignore
+            return JSON.parse(walletConnectMessage.results.result);
+
+        }
+        return {};
+
+    }
     private buildAlert(walletConnectMessage: WalletConnectMessage) {
 
-        this.pbResponse = null;
+        const rMsg = this.responseMessage(walletConnectMessage);
 
-        // @ts-ignore
-        if (walletConnectMessage.results.valid === false) {
-            // @ts-ignore
-            this.alertMessage = walletConnectMessage.results.error.message;
-            this.danger();
-        } else {
-            //FIXME can be multiple, parse out blockchain response
-            // @ts-ignore
-            this.pbResponse = JSON.parse(walletConnectMessage.results.result);
-            this.alertMessage = "Transaction processed.";
-            this.success();
+        if (rMsg) {
+            this.hasAlert = true;
+            this.alertMessage = rMsg;
         }
-
-        this.hasAlert = true;
+        this.pbResponse = this.pbResponseMessage(walletConnectMessage);
     }
 
     alertClosed() {

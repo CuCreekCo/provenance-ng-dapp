@@ -35,19 +35,17 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
+              "buffer",
               "crypto-js",
               "crypto",
               "crypto-browserify",
               "events/",
+              "@babel/runtime/regenerator",
               "google-protobuf/google/protobuf/any_pb",
               "google-protobuf/google/protobuf/timestamp_pb",
               "hoist-non-react-statics",
               "@provenanceio/walletconnect-js/lib/service",
-              "@provenanceio/wallet-lib/lib/services/message-service",
-              "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/tx_pb",
-              "@provenanceio/wallet-lib/lib/proto/cosmos/base/v1beta1/coin_pb",
-              "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/accessgrant_pb",
-              "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/marker_pb",
+              "@provenanceio/wallet-utils/lib",
               "qrcode",
               "query-string",
               "secp256k1",
@@ -70,8 +68,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
+                  "maximumWarning": "4kb",
+                  "maximumError": "6kb"
                 }
               ],
               "fileReplacements": [

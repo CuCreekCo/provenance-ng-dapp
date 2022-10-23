@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {WalletConnectService} from "../service/wallet-connect.service";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {WalletConnectMessage} from "../model/Models";
-import {State, WINDOW_MESSAGES} from "@provenanceio/walletconnect-js/lib/service";
+import {State, WINDOW_MESSAGES, WALLET_LIST} from "@provenanceio/walletconnect-js/lib/service";
 import {Router} from "@angular/router";
+import {Wallet, WalletList} from "@provenanceio/walletconnect-js/lib/types";
 
 @Component({
     selector: 'app-connect-wallet',
@@ -50,4 +51,19 @@ export class ConnectWalletComponent implements OnInit {
         return this.walletConnectService.state;
     }
 
+    desktopWallets(): WalletList {
+        return WALLET_LIST.filter((w) => {
+            return w.type !== "mobile";
+        });
+    }
+
+    dispatchWallet(wallet: Wallet) {
+        if(wallet.eventAction) {
+            console.log(`dispatching ${wallet.walletUrl} ${this.walletConnectService.state.QRCodeUrl} ${wallet.eventAction}`);
+            wallet.eventAction({
+                uri: encodeURIComponent(this.walletConnectService.state.QRCodeUrl),
+                event: "walletconnect_init"
+            })
+        }
+    }
 }

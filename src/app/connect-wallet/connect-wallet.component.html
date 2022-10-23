@@ -2,20 +2,45 @@
 	<div class="text-white">
 		{{state().address}}
 	</div>
-	<button type="button" [class.visually-hidden]="!state().connected" class="btn btn-sm btn-outline-light" (click)="disconnect()">Disconnect</button>
-	<button type="button" [class.visually-hidden]="state().connected" class="btn btn-sm btn-outline-light" (click)="connect(content)">Connect</button>
+	<button type="button" [class.visually-hidden]="!state().connected" class="btn btn-sm btn-outline-light"
+	        (click)="disconnect()">Disconnect
+	</button>
+	<button type="button" [class.visually-hidden]="state().connected" class="btn btn-sm btn-outline-light"
+	        (click)="connect(content)">Connect
+	</button>
 </div>
 
 <ng-template #content let-modal>
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Scan with Wallet</h4>
+		<h4 class="modal-title" id="modal-basic-title">Select Wallet</h4>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
 	</div>
 	<div class="modal-body">
-		<div class="row">
-			<div class="col">
-				<img [src]="state().QRCode" class="mx-auto d-block">
-			</div>
-		</div>
+		<ul ngbNav #nav="ngbNav" class="nav-tabs">
+			<li ngbNavItem>
+				<a ngbNavLink>Mobile Wallet</a>
+				<ng-template ngbNavContent>
+					<div class="row">
+						<div class="col">
+							<img [src]="state().QRCode" class="mx-auto d-block">
+						</div>
+					</div>
+				</ng-template>
+			</li>
+			<li ngbNavItem>
+				<a ngbNavLink>Desktop Wallet</a>
+				<ng-template ngbNavContent>
+					<div class="container px-4">
+						<div class="row gx-5 py-2" *ngFor="let wallet of desktopWallets()">
+							<div class="col">
+								<button type="button" class="btn btn-sm btn-primary"
+								        (click)="dispatchWallet(wallet)">{{wallet.title}}</button>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</li>
+		</ul>
+		<div [ngbNavOutlet]="nav"></div>
 	</div>
 </ng-template>
