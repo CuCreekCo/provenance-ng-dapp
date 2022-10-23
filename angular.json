@@ -36,26 +36,26 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "buffer",
-              "crypto-js",
               "crypto",
               "crypto-browserify",
+              "crypto-js",
               "events/",
-              "@babel/runtime/regenerator",
               "google-protobuf/google/protobuf/any_pb",
               "google-protobuf/google/protobuf/timestamp_pb",
               "hoist-non-react-statics",
-              "@provenanceio/walletconnect-js/lib/service",
-              "@provenanceio/wallet-utils/lib",
               "qrcode",
               "query-string",
               "secp256k1",
               "stream-browserify",
+              "@babel/runtime/regenerator",
+              "@provenanceio/walletconnect-js/lib/service",
+              "@provenanceio/wallet-utils/lib",
               "@tendermint/belt",
-              "@walletconnect/window-metadata",
-              "@walletconnect/socket-transport",
+              "@walletconnect/client",
               "@walletconnect/environment",
+              "@walletconnect/socket-transport",
               "@walletconnect/types",
-              "@walletconnect/client"
+              "@walletconnect/window-metadata"
             ]
           },
           "configurations": {
