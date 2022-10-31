@@ -10,7 +10,6 @@ import {
 import { from, Observable, Observer } from 'rxjs';
 import { WalletConnectMessage } from '../model/Models';
 import { Message } from 'google-protobuf';
-import { convertUtf8ToHex } from '@walletconnect/utils';
 import type {
   GasPrice,
   WCSState,
