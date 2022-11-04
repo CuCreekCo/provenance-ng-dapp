@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { WalletConnectService } from '../service/wallet-connect.service';
 import { GasPrice } from '@provenanceio/walletconnect-js/lib/types';
 
@@ -20,7 +20,7 @@ export class SendHashComponent implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private walletConnectService: WalletConnectService
   ) {}
 
