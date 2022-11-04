@@ -35,7 +35,7 @@ changes are needed.
 
 Update `angular.json` to allow the following CommonJS dependencies:
 
-```json
+```
 "allowedCommonJsDependencies": [
     "buffer",
     "crypto",
@@ -59,13 +59,12 @@ Update `angular.json` to allow the following CommonJS dependencies:
     "@walletconnect/types",
     "@walletconnect/window-metadata"
 ]
-
 ```
 
 ## Webpack5 Issues
 
 Update `tsconfig.json` to provide the following paths:
-```json
+```
 "paths": {
   "stream": [ "./node_modules/stream-browserify" ],
   "crypto": [ "./node_modules/crypto-browserify" ],
@@ -81,7 +80,7 @@ file `custom-webpack-config.js` and then update `angular.json` replacing all
 
 Next, add a custom web pack config element to the `architect` section:
 
-```json
+```
 "customWebpackConfig": {
   "path": "./custom-webpack-config.js"
 },
@@ -104,7 +103,7 @@ declare global {
 
 Update the `tsconfig.app.json` addint the `main.lib.d.ts` file to `files`:
 
-```json
+```
 "files": [
     "src/main.ts",
     "src/polyfills.ts",
