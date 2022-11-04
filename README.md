@@ -36,51 +36,55 @@ changes are needed.
 Update `angular.json` to allow the following CommonJS dependencies:
 
 ```json
-            "allowedCommonJsDependencies": [
-              "crypto-js",
-              "crypto",
-              "crypto-browserify",
-              "events/",
-              "google-protobuf/google/protobuf/any_pb",
-              "google-protobuf/google/protobuf/timestamp_pb",
-              "hoist-non-react-statics",
-              "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/tx_pb",
-              "@provenanceio/wallet-lib/lib/proto/cosmos/base/v1beta1/coin_pb",
-              "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/accessgrant_pb",
-              "@provenanceio/wallet-lib/lib/proto/provenance/marker/v1/marker_pb",
-              "qrcode",
-              "query-string",
-              "secp256k1",
-              "stream-browserify",
-              "@tendermint/belt",
-              "@walletconnect/window-metadata",
-              "@walletconnect/socket-transport",
-              "@walletconnect/environment"
-            ]
+"allowedCommonJsDependencies": [
+    "buffer",
+    "crypto",
+    "crypto-browserify",
+    "crypto-js",
+    "events/",
+    "google-protobuf/google/protobuf/any_pb",
+    "google-protobuf/google/protobuf/timestamp_pb",
+    "hoist-non-react-statics",
+    "qrcode",
+    "query-string",
+    "secp256k1",
+    "stream-browserify",
+    "@babel/runtime/regenerator",
+    "@provenanceio/walletconnect-js/lib/service",
+    "@provenanceio/wallet-utils/lib",
+    "@tendermint/belt",
+    "@walletconnect/client",
+    "@walletconnect/environment",
+    "@walletconnect/socket-transport",
+    "@walletconnect/types",
+    "@walletconnect/window-metadata"
+]
+
 ```
 
 ## Webpack5 Issues
 
 Update `tsconfig.json` to provide the following paths:
 ```json
-    "paths": {
-      "stream": [ "./node_modules/stream-browserify" ],
-      "crypto": [ "./node_modules/crypto-browserify" ],
-      "events": [ "./node_modules/events" ]
-    }
+"paths": {
+  "stream": [ "./node_modules/stream-browserify" ],
+  "crypto": [ "./node_modules/crypto-browserify" ],
+  "events": [ "./node_modules/events" ]
+}
 ```
 
 Install the custom webpack dependency: `npm install @angular-builders/custom-webpack --save`
 
 Include the file images included in `walletconnect-js` by creating a custom webpack 
-file `extra-webpack-config.js` and then update `angular.json` replacing all 
-`@angular-devkit/build-angular` with `@angular-builders/custom-webpack`. Then add a custom
-web pack config element to the `architect` section:
+file `custom-webpack-config.js` and then update `angular.json` replacing all 
+`@angular-devkit/build-angular` with `@angular-builders/custom-webpack`. 
+
+Next, add a custom web pack config element to the `architect` section:
 
 ```json
-            "customWebpackConfig": {
-              "path": "./extra-webpack-config.js"
-            },
+"customWebpackConfig": {
+  "path": "./custom-webpack-config.js"
+},
 ```
 
 Fix Tendermint's shit exports by adding `"allowSyntheticDefaultImports": true` to
@@ -88,4 +92,22 @@ Fix Tendermint's shit exports by adding `"allowSyntheticDefaultImports": true` t
 
 ## Runtime Issues
 
-Add a custom `main.lib.d.ts`.
+Create a file named `main.lib.d.ts` to declare a `Window` interface for `global`:
+
+```typescript
+export {};
+
+declare global {
+    interface Window { global: any; Buffer: any; }
+}
+```
+
+Update the `tsconfig.app.json` addint the `main.lib.d.ts` file to `files`:
+
+```json
+"files": [
+    "src/main.ts",
+    "src/polyfills.ts",
+    "src/main.lib.d.ts"
+]
+```

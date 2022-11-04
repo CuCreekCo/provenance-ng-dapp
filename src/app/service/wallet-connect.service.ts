@@ -117,8 +117,6 @@ export class WalletConnectService {
       description: `Send ${amount}${denom} to ${toAddress}`,
       message: msg,
     };
-    console.log('this.wc.state', this.wc.state);
-    this.wc.sendMessage(customMessage);
     return from(this.wc.sendMessage(customMessage));
   }
 }
